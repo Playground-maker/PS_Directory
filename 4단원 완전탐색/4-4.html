@@ -11,6 +11,11 @@
                 product.sort((a, b) => (a[0] + a[1]) - (b[0] + b[1])); 
                 // a[0], b[0] : 상품 가격   a[1], b[1] : 배송비
 
+                for(let i = 0; i < n; i++) {
+                    let money = m - (product[i][0]/2 + product[i][1]);
+                    
+                }
+
                 return answer;
             }
             
