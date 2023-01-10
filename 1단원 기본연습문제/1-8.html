@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){
+                let answer = arr;
+                let sum = arr.reduce((a,b) => a + b, 0);
+                for(let i = 0; i < 8; i++)  {  // i는 j 앞이므로 1 뺀 8까지만 돌면 됨
+                    for(let j = i + 1; j < 9; j++) {
+                        if((sum - (arr[i] + arr[j])) === 100) {
+                            arr.splice(j, 1);
+                            arr.splice(i, 1);
+                            // i를 먼저 지우게 되면 배열이 당겨져서 다른 j값을
+                            // 지우게 되므로 뒤에 있는 j를 먼저 지워줌
+                        }
+                    }
+                }          
+                return answer;
+            }
+            let arr=[20, 7, 23, 19, 10, 15, 25, 8, 13];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

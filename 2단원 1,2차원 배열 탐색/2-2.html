@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+          // 굳이 for문 두번 쓸 필요 없이 이렇게 한번만 써서도 해결할 수 있음
+            function solution(arr){         
+                let answer = 1, max = arr[0]; // 첫번째 값은 무조건 넣으니까 1로 시작
+                for(let i = 0; i < arr.length; i++) {
+                  if(arr[i] > max) {
+                    answer++;
+                    max = arr[i]; // max값을 바꿔줌
+                  }
+                }
+                return answer;
+            }
+            let arr=[130, 135, 148, 140, 145, 150, 150, 153];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

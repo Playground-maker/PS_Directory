@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        // 뇌피셜 / 4개 함수 모두 다 콜백 함수를 반복 호출하는 것은 동일함
+        // forEach, map, filter, reduce : 고차함수(매개변수로 함수를 받는 것들)
+        // function forEach(predicate, thisArg) {
+        //   for(let i = 0; i < a.length; i++) {
+                // predicate(a[i], i)
+        //   }
+        // }
+        // - predicate 함수임, for 대신 사용할만함
+
+              
+        a = [10, 11, 12, 13, 14, 15];
+
+        a.forEach(function(v, i) {
+            console.log(v, i, this) // v는 값, i는 index
+        }, [1, 2]);
+
+        let answer = a.map(function(v, i){
+          return v*v;
+        }, [1, 2]);
+        console.log(answer);
+        // map이 생성하는 배열은 원본배열과 길이가 같음
+        // 제대로 return이 안되면 undefined 넣어서 내보냄
+
+        answer = a.filter(function(v, i){
+          return v % 2 == 1;
+        }, [1, 2]);
+        console.log(answer);
+        // 얘는 만족하는 애들만 내보냄, 그래서 길이가 다른 배열이 나올 수 있음
+
+        
+        // function reduce(predicate, val) {
+        //   let result = val;
+        //   for(let i = 0; i < a.length; i++) {
+        //     result = predicate(result, a[i]);
+        //   }
+        //   return result;
+        // }
+
+        answer = a.reduce(function(acc, v){
+          return acc + v; // 여기서 리턴한 값이 위의 acc로 다시 넘어간다고 생각
+        }, 0);
+        console.log(answer);
+        // reduce는 초기화값을 콜백함수 옆에 넣어줌
+        // map이나 filter처럼 배열을 생성하는게 아니고
+        // 어떤 값, value를 생성하는 함수임
+        // 보통 이런 식으로 sum 구할 때 종종 사용함
+
+    </script>
+
+</body>
+</html>

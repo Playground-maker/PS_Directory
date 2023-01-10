@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // n 없이 arr만 넘어가게 만들어도 됨
+            function solution(n, arr){
+               let answer, max = Number.MIN_SAFE_INTEGER;
+               for(let x of arr) {
+                let sum = 0, temp = x;
+                // x의 (원본)값을 temp에 저장
+                while(temp) {
+                 //   let t = tmp % 10;
+                 //   sum += t; 와 같음
+                    sum += (temp % 10);
+                    temp = Math.floor(temp/10);
+                }   // 여기까지는 숫자를 이용한 방법
+                
+                // 내장함수로 한방에 끝내는 방법
+              /*  let sum = x.toString().split('').reduce((a,b)=>a+Number(b), 0); // 한방에 합해버리는 법 */
+                // console.log(sum);
+
+                if(sum > max) {
+                    max = sum;
+                    answer = x; // x는 원본
+                }
+                else if(sum === max) {
+                    if(x > answer) answer = x;
+                }
+               }
+                return answer;
+            }
+            
+            let arr=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr));
+        </script>
+    </body>
+</html>
+
+
+

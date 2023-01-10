@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){  
+                let answer;
+                answer = s.filter(function(v, i) {
+                    //  콜백 함수 function의 내부
+                    //  console.log(v,i)로 이게 뭔지 확인해보기
+                    
+                    return s.indexOf(v) === i; // 참일 때의 v값을 리턴하게 됨
+
+                    // 두번째 풀이방법 if(s.indexOf(v) === i) return true;
+                });
+                return answer;
+            }
+            let str=["good", "time", "good", "time", "student"];
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

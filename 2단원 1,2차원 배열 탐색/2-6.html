@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){  
+                let answer = Number.MIN_SAFE_INTEGER;
+                let n = arr.length;
+                let sum1 = sum2 = 0; // sum1은 행, sum2는 열
+                for(let i = 0; i < n; i++) {
+                    sum1 = sum2 = 0; // 행과 열을 더하는 j for문이 돌기 전에 다시 초기화
+                    for(let j = 0; j < n; j++) {
+                        sum1 += arr[i][j]; // 행을 더함
+                        sum2 += arr[j][i]; // 열을 탐색
+                        // i고정에 j돌리는 걸로 생각하면 됨
+                    }
+                    answer = Math.max(answer, sum1, sum2);
+                }
+                sum1 = sum2 = 0; // 다시 초기화
+                for(let i = 0; i < n; i++) {
+                    //이 for문은 대각선 합 구하는 부분
+                    sum1 += arr[i][i];
+                    sum2 += arr[i][(n-1)-i];
+                }
+                answer = Math.max(answer, sum1, sum2);
+                return answer;
+            }
+
+            let arr=[[10, 13, 10, 12, 15], 
+                     [12, 39, 30, 23, 11],
+                     [11, 25, 50, 53, 15],
+                     [19, 27, 29, 37, 27],
+                     [19, 13, 30, 13, 19]];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

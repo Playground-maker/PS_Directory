@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){
+                let answer = "YES";
+                s = s.toLowerCase();
+                // console.log(s.split('')); 
+                // 리버스 함수 사용하기(case 1)
+                // reverse는 배열에 사용할 수 있으므로 split로 한글자 배열로 만들어 주어야
+                // split된 배열을 join으로 다시 string으로 묶어주기
+                if(s.split('').reverse().join('') !== s) return "NO";
+
+                // 리버스 함수 사용하지 않고 푸는 방법(case 2)
+                // let len = s.length;
+                // for(let i = 0; i < Math.floor(len/2); i++) {
+                //     if(s[i] !== s[(len - 1) - i]) return 'NO';
+                // }
+                return answer;
+            }
+            
+            let str="goooG";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

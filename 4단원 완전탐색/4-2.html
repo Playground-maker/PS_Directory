@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function isPrime(num){
+                // 소수인지 판별하는 함수를 만듦
+                if(num === 1) return false;
+                for(let i = 2; i < parseInt(num/2); i++) {
+                    // num/2까지 돌려도 됨. 어차피 가장 큰 약수까지 돌리면 되므로(자기자신 빼고)
+                    // parseInt(Math.sqrt(num)) 으로 바꿔도 됨
+                    if(num % i === 0) return false;
+                    // 약수가 존재할 시 false 반환
+                }
+                return true; // 없으면 true 반환
+            }
+
+            function solution(arr){
+                let answer = [];
+                for(let x of arr) {
+                    let res = 0;
+                    while(x) {
+                        // 여기서는 원본이 필요 없음
+                        // 굳이 temp 만들어서 할 필요 x
+                        let t = x % 10;
+                        res = res * 10 + t;
+                        // 이렇게 하면 뒤집어짐
+                        x = parseInt(x/10);
+                        // 이렇게 해도 몫이 나오고, Math.floor 사용해도 됨
+                    }
+                    // while 문 대신 toString 이용하는 방법
+                    
+                    // let res = Number(x.toString().split('').reverse().join(''));
+                    // Number 처리를 해야 052 같은 경우 0이 빠짐
+                    // join을 해야 다시 string으로 돌아옴
+                    
+                    if(isPrime(res)) answer.push(res);
+                }
+                return answer;
+            }
+            
+            let arr=[32, 55, 62, 20, 250, 370, 200, 30, 100];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
+
+
+
