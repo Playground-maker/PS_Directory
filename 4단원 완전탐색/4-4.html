@@ -7,13 +7,24 @@
         <script>
             function solution(m, product){
                 let answer = 0;
-                n = product.length;
+                let n = product.length;
                 product.sort((a, b) => (a[0] + a[1]) - (b[0] + b[1])); 
                 // a[0], b[0] : 상품 가격   a[1], b[1] : 배송비
 
                 for(let i = 0; i < n; i++) {
                     let money = m - (product[i][0]/2 + product[i][1]);
-                    
+                    // money 에는 사고 남은 예산이 저장됨
+
+                    let cnt = 1;
+                    for(let j = 0; j < n; j++) {
+                        if(j !== i && (product[j][0] + product[j][1]) > money) break;
+                        if(j !== i && (product[j][0] + product[j][1]) <= money) {
+                            // 상품을 살 수 있는 조건
+                            money = money - (product[j][0] + product[j][1]);
+                            cnt++; // 상품을 하나 더 샀다
+                        }
+                    }
+                    answer = Math.max(answer, cnt);
                 }
 
                 return answer;

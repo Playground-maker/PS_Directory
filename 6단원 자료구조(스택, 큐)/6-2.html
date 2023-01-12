@@ -6,7 +6,20 @@
     <body>
         <script>
             function solution(s){  
-                
+                let answer;
+                stack = [];
+                for(let x of s) {
+                    if( x === ')' ) {
+                        // 닫는 괄호를 만났을 때
+                        while( stack.pop() !== '(' );
+
+                    }
+                    else stack.push(x); // 여는 괄호나 문자열
+                }
+                // console.log(stack);
+
+                answer = stack.join('');
+                // stack에 있는 것을 string으로 해줘서 넣음
                 return answer;
             }
 
