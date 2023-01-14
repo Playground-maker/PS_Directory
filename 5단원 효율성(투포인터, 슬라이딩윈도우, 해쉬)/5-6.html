@@ -6,7 +6,25 @@
     <body>
         <script>
             function solution(s){  
-                
+                let answer;
+                let sH = new Map();
+
+                for(let x of s) {
+                    if(sH.has(x)) sH.set(x, sH.get(x) + 1);
+                    // sH에 x라는 문자가 존재하냐 -> 존재하면 1 추가
+                    else sH.set(x, 1);
+                    // 없으면 만들고 1 넣어라
+                }
+                // console.log(sH);
+
+                let max = Number.MIN_SAFE_INTEGER;
+                for(let [key, value] of sH) {
+                    //console.log(key, value);
+                    if(value > max) {
+                        max = value;
+                        answer = key;
+                    }
+                }
                 return answer;
             }
 

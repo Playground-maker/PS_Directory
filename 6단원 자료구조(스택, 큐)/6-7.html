@@ -5,7 +5,27 @@
     </head>
     <body>
         <script>
-            function solution(need, plan){ 
+            function solution(need, plan){
+                let answer = "YES";
+                let queue = need.split('');
+                //console.log(queue); => ["C", "B", "A"]
+
+                for(let x of plan) {
+                    if(queue.includes(x)) {
+                        //이 조건을 만족하면 있다는 것 -> 필수과목 의미
+                        
+                        if(x !== queue.shift()) {
+                        // 필수과목이긴 한데 너무 일찍 나온 경우
+                        //console.log(queue);
+                            return "NO";
+                        }
+                        
+                    }
+                }
+
+                // 필수과목을 아예 빠뜨려서 queue에 남아있는 경우
+                if(queue.length > 0) return "NO";
+
                 return answer;
             }
 

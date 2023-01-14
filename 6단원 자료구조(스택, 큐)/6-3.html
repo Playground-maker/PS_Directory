@@ -6,7 +6,33 @@
     <body>
         <script>
             function solution(board, moves){
-                
+                let answer = 0;
+                let stack = [];
+
+                moves.forEach(pos => {
+                    // element를 pos로 바꾸어주었음
+                    // element는 배열 moves의 값 1, 5, 3,... 을 의미함
+                    for(let i = 0; i < board.length; i++) {
+                        if(board[i][pos - 1] !== 0) {
+                            // 인형을 만난 경우
+                            let temp = board[i][pos - 1];
+                            board[i][pos - 1] = 0;
+                            // 꺼내고 빈공간 만들면 됨
+
+                            if(temp === stack[stack.length - 1]) {
+                                // 꺼낸 인형이 스택의 맨 위 인형과 같은 경우 -> 터뜨려야
+                                stack.pop();
+                                answer += 2;
+                                // 터뜨리면 answer값이 2 증가
+                            }
+                            else stack.push(temp); // 다르면 스택에 넣으면 됨
+                            break; // 여기서 break 안 걸면 1번 열에서 끝까지 다 탐색해버림
+                                   // 인형을 하나만 꺼내야 하므로
+                        }
+                    }
+                })
+
+
                 return answer;
             }
             

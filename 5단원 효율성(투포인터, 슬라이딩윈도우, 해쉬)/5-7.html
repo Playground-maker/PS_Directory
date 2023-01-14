@@ -6,12 +6,29 @@
     <body>
         <script>
             function solution(str1, str2){
-                
+                let answer = "YES";
+                let sH = new Map();
+                for(let x of str1) {
+                    if(sH.has(x)) sH.set(x, sH.get(x) + 1);
+                    else sH.set(x, 1);
+                } // 이 for 구문은 5-6과 같음, 채우는 과정
+
+                for(let x of str2) {
+                    if(!sH.has(x) || sH.get(x) === 0) answer = "NO";
+                    // 여기서 || 연산자는 or를 의미함
+                    // 1. key 값이 있는지 없는지 체크(알파벳)
+                    // 2. 나는 있는데 상대방은 없는 경우(갯수가 맞지 않는 경우)
+                    sH.set(x, sH.get(x) - 1);
+                    // 이 for문을 전부 만족하면 아나그램인 것
+                }
                 return answer;
             }
             
             let a="AbaAeCe";
-            let b="baeeACA";
+            let b="baeeACA"; // 요건 YES
+
+            // let a="abaCC";
+            // let b="Caaab"; // 요건 NO
             console.log(solution(a, b));
         </script>
     </body>

@@ -6,7 +6,25 @@
     <body>
         <script>
             function solution(n, k){
-                
+                let answer;
+                let queue = Array.from({length : n}, (v, i) => i+1);
+                // 이러면 1~8까지 넣은 크기 8의 배열이 생김(n = 8)
+
+                while(queue.length) {
+                    // queue의 길이가 0, 즉 아무것도 없을 때 까지 while구문이 돌게 됨
+
+                    for(let i = 1; i < k; i++) queue.push(queue.shift());
+                    // 큐에서 shift 한 것을 다시 push해 줌
+                    // 이걸 k - 1 번 하게 됨, 여기서 k - 1은 2 즉 2개를 빼서 뒤로 다시 넣음
+
+                    queue.shift();
+                    // 그리고 하나 빼주면 됨
+                    // k가 3이므로 3번째 것이 빠지게 됨
+
+                    if(queue.length === 1) answer = queue.shift();
+                    // 여기서 마지막 것을 빼서 answer에 넣으면 queue 길이가 0이 되므로
+                    // while 구문을 빠져나오게 됨         
+                }
                 return answer;
             }
 

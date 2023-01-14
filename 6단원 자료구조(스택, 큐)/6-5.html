@@ -5,7 +5,24 @@
     </head>
     <body>
         <script>
-            function solution(s){         
+            function solution(s){
+                let answer = 0;
+                let stack = [];
+
+                // 이걸 let x of s 로 만들면 인덱스 접근이 쉽지 않으므로 이렇게 for구문 생성
+                for(let i = 0; i < s.length; i++) {
+                    if(s[i] === '(') stack.push(s[i]);
+                    else {
+                        // 바로 괄호를 하나 스택에서 빼 주어야 함
+                        stack.pop();
+
+                        if(s[i - 1] === '(') answer += stack.length;
+                        // 바로 앞이 여는 괄호 -> 레이저인 경우
+
+                        else answer += 1;
+                        // 막대기의 끝인 경우
+                    }
+                }
                 return answer;
             }
             
