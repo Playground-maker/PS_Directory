@@ -5,7 +5,18 @@
     </head>
     <body>
         <script>
-            function solution(arr){ 
+            function solution(arr){
+                let answer = arr;
+                for(let i = 0; i < arr.length - 1; i++) {
+                    // 길이가 6이므로 5 미만 -> 4까지만 돌면 됨
+                    for(let j = 0; j < arr.length - i - 1; j++) {
+                        // i가 커질수록 조건식 범위가 작아지도록 만듦
+                        if(arr[j] > arr[j + 1]) {
+                            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                            // 7-1의 선택정렬보다 교환을 많이 함
+                        }
+                    }
+                }
                 return answer;
             }
 
