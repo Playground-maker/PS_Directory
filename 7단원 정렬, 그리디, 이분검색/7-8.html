@@ -6,7 +6,30 @@
     <body>
         <script>
             function solution(meeting){
-                
+                // 그리디 알고리즘의 대표적인 예 - 회의실 배정
+
+                let answer = 0;
+                meeting.sort((a, b) => {
+                    if(a[1] === b[1]) return a[0] - b[0];
+                    // 끝나는 타임은 1번 인덱스이므로 같다는 조건을 달고
+                    // 시작시간을 정렬해준다
+
+                    else return a[1] - b[1];
+                    // 끝나는 시간이 다르면 끝나는 시간대로 정렬해주면 됨
+                })
+
+                let et = 0;
+                for(let x of meeting) {
+                    // 쭉 정렬된 걸 탐색해 보자
+
+                    if(x[0] >= et) {
+                        answer++;
+                        et = x[1];
+                        // 끝 시간보다 빠르면 answer 값 올려주고,
+                        // 끝 시간을 변경시켜 준다
+                    }
+
+                }
                 return answer;
             }
 
