@@ -6,22 +6,44 @@
     <body>
         <script>
             function solution(size, arr){
-                let answer=Array.from({length:size}, ()=>0);
-                arr.forEach(x => {
-                    let pos=-1;
-                    for(let i=0; i<size; i++) if(x===answer[i]) pos=i;
-                    if(pos===-1){
-                        for(let i=size-1; i>=1; i--){
-                            answer[i]=answer[i-1];
-                        }
+                let answer = Array.from({length : size}, () => 0);
+                // size 크기의 배열에 0으로 초기화 해서 만듦
+
+                arr.forEach(element => {
+                    let pos = -1;
+                    for(let i = 0; i < size; i++) {
+                        if(element === answer[i]) pos = i;
+                        // answer라는 이름의 캐시에 element가 있는 경우
+                        // hit를 의미하므로 hit된 지점의 인덱스를 pos에 넣음
                     }
-                    else{
-                        for(let i=pos; i>=1; i--){
-                            answer[i]=answer[i-1];
+                    // cache miss인 경우 변동사항이 없으므로 pos값은 -1 그대로
+
+
+                    if(pos === -1) {
+                        // miss가 난 경우
+                        // 제일 뒤에서부터 당기고 0번에다가 넣으면 됨
+                        
+                        for(let i = size - 1; i >= 1; i--) {
+                            // 여기서의 i는 위의 i와 다름
+                            answer[i] = answer[i - 1];
                         }
-                    } 
-                    answer[0]=x;  
-                });
+                        // answer[0] = element;
+                    }
+
+
+                    else {
+                        // hit가 난 경우
+                        for(let i = pos; i >= 1; i--) {
+                            // 여기서의 i는 위의 i값들과 다름
+                            // hit난 지점부터 땡기면 됨
+                            answer[i] = answer[i - 1];
+                        }
+                        // answer[0] = element;
+                    }
+
+                    answer[0] = element; // 두번 적을 필요 없이 여기 한번만 
+                })
+
 
                 return answer;
             }
@@ -35,7 +57,7 @@
 
 
 
-<html>
+<!-- <html>
     <head>
         <meta charset="UTF-8">
         <title>출력결과</title>
@@ -44,16 +66,27 @@
         <script>
             function solution(size, arr){
                 let answer=[];
-                arr.forEach(x => {
+                arr.forEach(element => {
                     let pos=-1;
-                    for(let i=0; i<size; i++) if(x===answer[i]) pos=i;
+                    for(let i=0; i<size; i++) if(element===answer[i]) pos=i;
+
+
                     if(pos===-1){
-                       answer.unshift(x);
+                    // miss가 난 경우
+
+                       answer.unshift(element);
+                       // 여기서 넣어주면 알아서 밀림
+
                        if(answer.length>size) answer.pop();
+                       // 길이가 size보다 커지면 뒷부분 잘라줌
                     }
+
+                    
                     else{
+                    // hit한 경우
+
                        answer.splice(pos, 1);
-                       answer.unshift(x);
+                       answer.unshift(element);
                     } 
                    
                 });
@@ -65,4 +98,4 @@
             console.log(solution(5, arr));
         </script>
     </body>
-</html>
+</html> -->
