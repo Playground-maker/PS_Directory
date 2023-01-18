@@ -6,6 +6,23 @@
     <body>
         <script>
             function solution(target, arr){
+                let answer;
+                arr.sort((a, b) => a - b);
+                // 이분 검색 하려면 일단 정렬을 해야 함, 오름차순 정렬을 했음
+
+                let lt = 0, rt = arr.length - 1;
+                // lt와 rt는 인덱스 번호를 의미함
+
+                while(lt <= rt) {
+                    let mid = parseInt((lt + rt) / 2);
+                    if(arr[mid] === target) {
+                        answer = mid + 1;
+                        // 인덱스값이므로 +1한 값이 답임
+                        break;
+                    }
+                    else if(arr[mid] > target) rt = mid - 1;
+                    else lt = mid + 1;
+                } // 이게 이분 검색의 프로그래밍
                 
                 return answer;
             }
