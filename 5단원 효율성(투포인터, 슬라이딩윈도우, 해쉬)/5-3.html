@@ -6,7 +6,24 @@
     <body>
         <script>
             function solution(m, arr){
-                
+                // 투 포인터 알고리즘 - 이 문제 엄청 중요함!!
+                let answer = 0, lt = 0, sum = 0;
+                for(let rt = 0; rt < arr.length; rt++) {
+                    sum += arr[rt];
+                    if(sum === m) answer++;
+                    // 더하고 나서 확인
+
+
+                    while(sum >= m) {
+                        // 같아도 빼는것에 주의!!
+
+                        sum -= arr[lt++];
+                        // 빼고 나서 lt값 증가시키기
+
+                        if(sum === m) answer++;
+                        // 그리고 마지막에 다시 확인
+                    }
+                }
                 return answer;
             }
             
