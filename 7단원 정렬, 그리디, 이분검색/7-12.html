@@ -5,16 +5,52 @@
     </head>
     <body>
         <script>
+            // 마구간 정하기(결정알고리즘)
             function count(stable, dist){
-               
-               return cnt;
+                // dist = 가장 가까운 두 말의 거리
+                let cnt = 1; // 한마리는 무조건 배치하므로
+                let ep = stable[0]; // 첫번째 말은 무조건 맨 왼쪽
+
+                for(let i = 1; i < stable.length; i++) {
+                    // 두번째, 즉 1번 좌표부터 돎
+                    // 끝까지, 마굿간 좌표 다 돎
+                    
+                    if(stable[i] - ep >= dist) {
+                        // i라는 곳에 말을 놓을 수 있느냐 없느냐
+                        // 놓을 수 있으면
+                        cnt++;
+                        ep = stable[i];
+                    }    
+                }
+                return cnt;
             }
+            
             function solution(c, stable){
-                
+                // 배치해야할 말의 갯수 = c
+                let answer;
+                stable.sort((a, b) => a - b); // 숫자 정렬로 만들어주기 위해
+
+                let lt = 1;
+                let rt = stable[stable.length - 1];
+
+                while(lt <= rt) {
+                    let mid = parseInt((lt + rt)/2);
+
+                    if(count(stable, mid) >= c) {
+                        // 조건을 만족한다면 답이라고 할 수 있음
+                        answer = mid;
+
+                        // mid를 만족하므로 그 다음 값으로 lt를 만들어 줌
+                        lt = mid + 1;              
+                    }
+                    else rt = mid - 1; // 위 if조건을 만족 못하면 너무 mid값이
+                                       // 큰 것이므로 줄여줌
+                }
                 return answer;
             }
 
             let arr=[1, 2, 8, 4, 9];
+            // 5, 6, 8, 12, 14를 넣어서도 한번 보기
             console.log(solution(3, arr));
         </script>
     </body>
