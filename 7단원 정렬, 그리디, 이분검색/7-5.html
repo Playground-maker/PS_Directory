@@ -18,7 +18,6 @@
                     }
                     // cache miss인 경우 변동사항이 없으므로 pos값은 -1 그대로
 
-
                     if(pos === -1) {
                         // miss가 난 경우
                         // 제일 뒤에서부터 당기고 0번에다가 넣으면 됨
@@ -29,7 +28,6 @@
                         }
                         // answer[0] = element;
                     }
-
 
                     else {
                         // hit가 난 경우
@@ -43,8 +41,6 @@
 
                     answer[0] = element; // 두번 적을 필요 없이 여기 한번만 
                 })
-
-
                 return answer;
             }
 
