@@ -7,7 +7,23 @@
         <script>
             // 세 가지 방법을 전부 다 써야 하는 문제 !!
             function compareMaps(map1, map2){
-                
+                // map1 = sH, map2 = tH
+                // console.log(map1.size);
+
+                if(map1.size !== map2.size) return false;
+                // 사이즈 체크
+
+                for(let [key, value] of map1) {
+                    if(!map2.has(key) || map2.get(key) !== value) return false;
+                    // map1에 있는 key가 map2에도 있는가
+                    // has 뒤의 key는 map1 의미
+
+                    // if(map2.get(key) !== value) return false;
+                    // 이렇게 해도 됨, 위에처럼 합쳐버려도 되고
+                    // 연산자 왼쪽은 map2의 value 값, 오른쪽은 map1의 value 값
+
+                    // 먼저 key를 확인하고, 같으면 그 갯수도 같은지 확인한다
+                }
                 return true;
             }
 
@@ -30,7 +46,26 @@
                     if(sH.has(s[i])) sH.set(s[i], sH.get(s[i]) + 1);
                     else sH.set(s[i], 1);
                 }
+                // 여기까지가 초기 세팅
 
+                // 이제 투 포인터로 슬라이딩 윈도우 돌리기
+                let lt = 0; // 0에서 출발
+                for(let rt = len; rt < s.length; rt++) {
+                    // len부터 출발, 그 전까지는 이미 채워놨으니
+                    if(sH.has(s[rt])) sH.set(s[rt], sH.get(s[rt]) + 1);
+                    else sH.set(s[rt], 1);
+                    // 여기까지 하면 다 추가가 된 것, 그 다음은 비교!
+
+                    if(compareMaps(sH, tH)) answer++; 
+                    // 둘이 같으면 return true-> answer값 증가시키기
+
+                    sH.set(s[lt], sH.get(s[lt]) - 1);
+                    // 그 다음 lt에 있는 거 하나 빼 주기
+                    if(sH.get(s[lt]) === 0) sH.delete(s[lt]);
+                    // 만약 1개 남았는데 빼서 밸류값이 0이면, 그 키 값도 없애버리기
+                    lt++;
+                    // 빼고 추가 비교 -> 빼고 추가 비교 -> ...
+                }
                 return answer;
             }
             
