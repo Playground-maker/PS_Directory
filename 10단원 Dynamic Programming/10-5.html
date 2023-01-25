@@ -6,10 +6,25 @@
     <body>
         <script>
             function solution(m, arr){  
-                
+                // 이 문제는 4번 문제와 다르게 중복 사용이 불가능하다
+                // 따라서 중복을 피하기 위해서 배열을 뒤에서부터 채운다(0으로 된 배열을)
+                // m = 20
+
+                let answer = 0;
+                let dy = Array.from({length : m + 1}, () => 0);
+
+                for(let i = 0; i < arr.length; i++) {
+                    let ps = arr[i][0] // problem score
+                    let pt = arr[i][1] // problem time
+
+                    for(let j = m; j >= pt; j--) {
+                        // 반대로 돎
+                        dy[j] = Math.max(dy[j], dy[j - pt] + ps); // j분에서 얻을 수 있는 최대 점수
+                    }
+                }
+                answer = dy[m];
                 return answer;
             }
-
             let arr=[[10, 5], [25, 12], [15, 8], [6, 3], [7, 4]];
             console.log(solution(20, arr));
         </script>

@@ -10,17 +10,17 @@
 <body>
   <script>
     function solution(s) {
-      let answer, max = Number.MIN_SAFE_INTEGER;
-
+      let answer = "";
       for(let x of s) {
-        if(x.length > max) {
-          max = x.length;
-          answer = x;
-        }  
+        let num = x.charCodeAt();
+        if(num >= 97 && num <= 122) {
+          // 소문자인 경우
+          answer += String.fromCharCode(num - 32);
+        }
+        else answer += x;
       }
-      return answer;
     }
-    let str = ["teacher", "time", "student", "beautiful", "good"]; 
+    let str = "ItisTimeToStudy"; 
     console.log(solution(str));
   </script>
 </body>
